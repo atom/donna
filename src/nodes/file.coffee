@@ -13,7 +13,7 @@ module.exports = class File extends Class
   #
   # node - The class node (a {Object})
   # filename - A {String} representing the current filename
-  # lineMapping - An object mapping the actual position of a member to its Biscotto one
+  # lineMapping - An object mapping the actual position of a member to its MetaDoc one
   # options - Any additional parser options
   constructor: (@node, @fileName, @lineMapping, @options) ->
     try

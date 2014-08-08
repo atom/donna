@@ -1,4 +1,4 @@
-# Biscotto - the TomDoc-CoffeeScript API documentation generator
+# MetaDoc - the TomDoc-CoffeeScript API documentation generator
 #
 # # Header 1
 #

@@ -12,65 +12,32 @@ Metadata   = require './metadata'
 
 SRC_DIRS = ['src', 'lib', 'app']
 
-# Public: Biscotto - the TomDoc-CoffeeScript API documentation generator
-module.exports = class Biscotto
+module.exports = class MetaDoc
   @Parser: Parser
   @Metadata: Metadata
 
-  # Public: Get the current Biscotto version
-  #
-  # Returns a {String} representing the Biscotto version
   @version: ->
     'v' + JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf-8'))['version']
 
-  # Public: Run the documentation generator. This is usually done through
-  # the command line utility `biscotto` that is provided by this package.
-  #
-  # This function sets up all of the configuration options used by Biscotto.
-  #
-  # You can also run the documentation generation without writing files
-  # to the file system, by supplying a callback function.
-  #
-  # done - A {Function} to callback once the function is done
-  # file - A {Function} to callback on every file
-  # analytics - A {String} representing Google analytics tracking code
-  # homepage - The {String} homepage in the breadcrumbs
-  #
-  # Examples
-  #
-  #    biscotto = require 'biscotto'
-  #
-  #    file_generator_cb = (filename, content) ->
-  #      console.log "New file %s with content %s", filename, content
-  #
-  #    done = (err) ->
-  #      if err
-  #        console.log "Cannot generate documentation:", err
-  #      else
-  #        console.log "Documentation generated"
-  #
-  #    biscotto.run done, file_generator_cb
-  #
   @run: (done, file_generator_cb, analytics = false, homepage = false) ->
 
-    biscottoopts =
+    metadocopts =
       _ : []
 
-    # Read .biscottoopts project defaults
     try
-      if fs.existsSync('.biscottoopts')
-        configs = fs.readFileSync '.biscottoopts', 'utf8'
+      if fs.existsSync('.metadocopts')
+        configs = fs.readFileSync '.metadocopts', 'utf8'
 
         for config in configs.split('\n')
           # Key value configs
           if option = /^-{1,2}([\w-]+)\s+(['"])?(.*?)\2?$/.exec config
-            biscottoopts[option[1]] = option[3]
+            metadocopts[option[1]] = option[3]
           # Boolean configs
           else if bool = /^-{1,2}([\w-]+)\s*$/.exec config
-            biscottoopts[bool[1]] = true
+            metadocopts[bool[1]] = true
           # Argv configs
           else if config isnt ''
-            biscottoopts._.push config
+            metadocopts._.push config
 
 
       Async.parallel {
@@ -90,97 +57,26 @@ module.exports = class Biscotto
           Usage:   $0 [options] [source_files [- extra_files]]
           Default: $0 [options] #{ defaults.inputs.join ' ' } #{ extraUsage }
           """)
-          .options('r',
-            alias     : 'readme'
-            describe  : 'The readme file used'
-            default   : biscottoopts.readme || biscottoopts.r || defaults.readme
-          )
-          .options('n',
-            alias     : 'name'
-            describe  : 'The project name used'
-            default   : biscottoopts.name || biscottoopts.n || defaults.name
-          )
-          .options('q',
-            alias     : 'quiet'
-            describe  : 'Show no warnings'
-            boolean   : true
-            default   : biscottoopts.quiet || false
-          )
           .options('o',
             alias     : 'output-dir'
             describe  : 'The output directory'
-            default   : biscottoopts['output-dir'] || biscottoopts.o || './doc'
-          )
-          .options('a',
-            alias     : 'analytics'
-            describe  : 'The Google analytics ID'
-            default   : biscottoopts.analytics || biscottoopts.a || false
-          )
-          .options('v',
-            alias     : 'verbose'
-            describe  : 'Show parsing errors'
-            boolean   : true
-            default   : biscottoopts.verbose || biscottoopts.v  || false
+            default   : metadocopts['output-dir'] || metadocopts.o || './doc'
           )
           .options('d',
             alias     : 'debug'
             describe  : 'Show stacktraces and converted CoffeeScript source'
             boolean   : true
-            default   : biscottoopts.debug || biscottoopts.d  || false
+            default   : metadocopts.debug || metadocopts.d  || false
           )
           .options('h',
             alias     : 'help'
             describe  : 'Show the help'
           )
-          .options('s',
-            alias     : 'server'
-            describe  : 'Start a documentation server'
-          )
-          .options('j',
-            alias     : 'json'
-            describe  : 'The location (including filename) of optional JSON output'
-          )
-          .options('noOutput',
-            boolean   : true
-            describe  : 'Generates no documentation output'
-          )
-          .options('stats',
-            boolean   : true
-            describe  : 'Returns stats on documentation, such as total coverage'
-          )
-          .options('missing',
-            boolean   : true
-            describe  : 'Lists which elements are missing documentation'
-          )
-          .options('private',
-            boolean   : true
-            default   : biscottoopts.private || false
-            describe  : 'Show private methods'
-          )
-          .options('internal',
-            boolean   : true
-            default   : biscottoopts.internal || false
-            describe  : 'Show internal methods'
-          )
-          .options('metadata',
-            boolean   : true
-            describe  : 'The path to the top-level npm module directory'
-          )
-          .options('stability',
-            describe  : 'Set stability level'
-            default   : -1
-          ).default('title', biscottoopts.title || 'CoffeeScript API Documentation')
 
         argv = optimist.argv
 
         if argv.h
           console.log optimist.help()
-
-        else if argv.s
-          port = if argv.s is true then 8080 else argv.s
-          connect = require 'connect'
-          connect.createServer(connect.static(argv.o)).listen port
-          console.log 'Biscotto documentation from %s is available at http://localhost:%d', argv.o, port
 
         else
           options =
@@ -208,8 +104,8 @@ module.exports = class Biscotto
 
           extra = false
 
-          # ignore params if biscotto has not been started directly
-          args = if argv._.length isnt 0 and /.+biscotto$/.test(process.argv[1]) then argv._ else biscottoopts._
+          # ignore params if metadoc has not been started directly
+          args = if argv._.length isnt 0 and /.+metadoc$/.test(process.argv[1]) then argv._ else metadocopts._
 
           for arg in args
             if arg is '-'
@@ -233,6 +129,7 @@ module.exports = class Biscotto
             if stats.isDirectory()
               for filename in walkdir.sync input
                 if filename.match /\._?coffee$/
+                  console.log filename
                   try
                     relativePath = filename
                     relativePath = path.normalize(filename.replace(process.cwd(), ".#{path.sep}")) if filename.indexOf(process.cwd()) == 0
@@ -250,19 +147,9 @@ module.exports = class Biscotto
                   throw error if options.debug
                   console.log "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
 
-            metadataSlugs.push @generateMetadataSlug(package_json_path, parser, options) if options.metadata
+            metadataSlugs.push @generateMetadataSlug(package_json_path, parser, options)
 
-          if options.metadata
-            @writeMetadata(metadataSlugs, options)
-          else
-            generator = new Generator(parser, options)
-            generator.generate(file_generator_cb)
-
-            if options.json?.length
-              fs.writeFileSync options.json, JSON.stringify(parser.toJSON(generator.referencer), null, "    ");
-
-            parser.showResult(generator) unless options.quiet
-
+          @writeMetadata(metadataSlugs, options)
           done() if done
 
     catch error
@@ -336,17 +223,17 @@ module.exports = class Biscotto
         file = file.substring(1, file.length) if file.match /^\.\./
         return file
 
-  # Public: Get the Biscotto script content that is used in the webinterface
+  # Public: Get the MetaDoc script content that is used in the webinterface
   #
   # Returns the script contents as a {String}.
   @script: ->
-    @biscottoScript or= fs.readFileSync path.join(__dirname, '..', 'theme', 'default', 'assets', 'biscotto.js'), 'utf-8'
+    @metadocScript or= fs.readFileSync path.join(__dirname, '..', 'theme', 'default', 'assets', 'metadoc.js'), 'utf-8'
 
-  # Public: Get the Biscotto style content that is used in the webinterface
+  # Public: Get the MetaDoc style content that is used in the webinterface
   #
   # Returns the style content as a {String}.
   @style: ->
-    @biscottoStyle or= fs.readFileSync path.join(__dirname, '..', 'theme', 'default', 'assets', 'biscotto.css'), 'utf-8'
+    @metadocStyle or= fs.readFileSync path.join(__dirname, '..', 'theme', 'default', 'assets', 'metadoc.css'), 'utf-8'
 
   # Public: Find the source directories.
   @detectSources: (done) ->

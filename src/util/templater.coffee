@@ -15,12 +15,12 @@ module.exports = class Templater
   #
   # options - The options (a {Object})
   # referencer - The link type referencer (a {Referencer})
-  # parser - The biscotto parser (a {Parser})
+  # parser - The metadoc parser (a {Parser})
   constructor: (@options, @referencer, @parser) ->
     @JST = []
 
     @globalContext =
-      biscottoVersion: 'v' + JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'package.json'), 'utf-8'))['version']
+      metadocVersion: 'v' + JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'package.json'), 'utf-8'))['version']
       generationDate: new Date().toString()
       JST: @JST
       underscore: _

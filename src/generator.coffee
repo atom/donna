@@ -8,7 +8,7 @@ Referencer = require './util/referencer'
 Markdown   = require './util/markdown'
 
 # Public: The documentation generator uses the intermediate JSON from {Parser},
-# and generates the final HTML Biscotto documentation.
+# and generates the final HTML MetaDoc documentation.
 #
 module.exports = class Generator
 
@@ -26,7 +26,7 @@ module.exports = class Generator
   # to the callback.
   #
   # With a provided file generation callback, the assets will not be copied. You
-  # can use {Biscotto.script} and {Biscotto.style} to get them.
+  # can use {MetaDoc.script} and {MetaDoc.style} to get them.
   #
   # file_generator_cb - A {Function} that acts as a file generation callback
   #
@@ -394,8 +394,8 @@ module.exports = class Generator
 
   # Public: Copy the styles and scripts.
   copyAssets: ->
-    @copy path.join(__dirname, '..', 'theme', 'default', 'assets', 'biscotto.css'), path.join(@options.output, 'assets', 'biscotto.css')
-    @copy path.join(__dirname, '..', 'theme', 'default', 'assets', 'biscotto.js'), path.join(@options.output, 'assets', 'biscotto.js')
+    @copy path.join(__dirname, '..', 'theme', 'default', 'assets', 'metadoc.css'), path.join(@options.output, 'assets', 'metadoc.css')
+    @copy path.join(__dirname, '..', 'theme', 'default', 'assets', 'metadoc.js'), path.join(@options.output, 'assets', 'metadoc.js')
 
   # Public: Copy a file from its temporary location to a more permanent one.
   #

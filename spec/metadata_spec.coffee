@@ -3,7 +3,7 @@ path    = require 'path'
 
 {inspect} = require 'util'
 walkdir = require 'walkdir'
-Biscotto = require '../src/biscotto'
+MetaDoc = require '../src/metadoc'
 Parser  = require '../src/parser'
 Metadata = require '../src/metadata'
 
@@ -22,7 +22,7 @@ describe "Metadata", ->
     parser.parseContent source, filename
     metadata = new Metadata({}, parser)
     metadata.generate(CoffeeScript.nodes(source))
-    generated = Biscotto.populateSlug({ files: {} }, filename, metadata)
+    generated = MetaDoc.populateSlug({ files: {} }, filename, metadata)
 
     expected_filename = filename.replace(/\.coffee$/, '.json')
     expected = JSON.stringify(JSON.parse(fs.readFileSync expected_filename, 'utf8'), null, 2)
@@ -103,7 +103,7 @@ describe "Metadata", ->
         parser.parseFile path.join(test_path, "src", file)
 
     it "renders the package correctly", ->
-      slug = Biscotto.generateMetadataSlug(packageJsonPath, parser, {output: ""})
+      slug = MetaDoc.generateMetadataSlug(packageJsonPath, parser, {output: ""})
 
       expected_filename = path.join(test_path, 'test_metadata.json')
       expected = JSON.stringify(JSON.parse(fs.readFileSync expected_filename, 'utf8'), null, 2)

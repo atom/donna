@@ -116,7 +116,7 @@ module.exports = class Parser
     root
 
   # Public: Converts the comments to block comments, so they appear in the node structure.
-  # Only block comments are considered by Biscotto.
+  # Only block comments are considered by MetaDoc.
   #
   # content - A {String} representing the CoffeeScript file content
   convertComments: (content) ->

@@ -4,7 +4,7 @@ class TestExample
   # 
   # Examples
   #
-  #  biscotto = require 'biscotto'
+  #  metadoc = require 'metadoc'
   #  file = (filename, content) ->
   #    console.log "New file %s with content %s", filename, content
   #  done = (err) ->
@@ -12,5 +12,5 @@ class TestExample
   #      console.log "Cannot generate documentation:", err
   #    else
   #      console.log "Documentation generated"
-  #  biscotto.run file, done
+  #  metadoc.run file, done
   run: ->

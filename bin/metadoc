@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 require('coffee-script/register');
-require('../src/biscotto').run();
+require('../src/metadoc').run();

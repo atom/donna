@@ -1,5 +1,5 @@
 {
-  "name": "biscotto",
+  "name": "metadoc",
   "description": "A CoffeeScript documentation generator.",
   "keywords": [
     "coffeescript",
@@ -17,9 +17,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./src/biscotto",
+  "main": "./src/metadoc",
   "bin": {
-    "biscotto": "./bin/biscotto"
+    "metadoc": "./bin/metadoc"
   },
   "dependencies": {
     "coffee-script": ">= 1.6.2",
@@ -46,10 +46,10 @@
     "jsondiffpatch": "~0.1",
     "grunt-cli": "~0.1.13"
   },
-  "homepage": "https://github.com/atom/biscotto",
+  "homepage": "https://github.com/atom/metadoc",
   "repository": {
     "type": "git",
-    "url": "git://github.com/atom/biscotto.git"
+    "url": "git://github.com/atom/metadoc.git"
   },
   "scripts": {
     "test": "grunt test"

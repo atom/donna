@@ -1,17 +1,12 @@
-# Contribute to Biscotto
+# Contribute to MetaDoc
 
 ## Report issues
 
-Issues hosted at [GitHub Issues](https://github.com/atom/biscotto/issues).
-
-The Codo specs are template based, so make sure you provide a code snippet that can be added as failing spec to the
-project when reporting an issue with parsing your CoffeeScript code.
-
-_You can check if some parsing errors have occurred by running Biscotto in verbose mode._
+Issues hosted at [GitHub Issues](https://github.com/atom/metadoc/issues).
 
 ## Development
 
-Source hosted at [GitHub](https://github.com/atom/biscotto).
+Source hosted at [GitHub](https://github.com/atom/metadoc).
 
 Pull requests are very welcome! Please try to follow these simple rules if applicable:
 

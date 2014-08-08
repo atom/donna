@@ -1,7 +1,7 @@
 notification :gntp
 
-group :biscotto do
-  # CoffeeScript for the biscotto library
+group :metadoc do
+  # CoffeeScript for the metadoc library
   guard :coffeescript, input: 'src', output: 'lib', noop: true
 
   # Run Jasmine specs
@@ -10,9 +10,9 @@ group :biscotto do
     watch(%r{src|spec}) { `#{jasmine_node} --coffee --color spec/parser_spec.coffee` }
   end
 
-  # Generate biscotto doc
+  # Generate metadoc doc
   guard :shell do
-    watch(%r{src|theme}) { `./bin/biscotto` }
+    watch(%r{src|theme}) { `./bin/metadoc` }
   end
 end
 

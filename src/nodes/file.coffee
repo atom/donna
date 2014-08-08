@@ -87,21 +87,3 @@ module.exports = class File extends Class
   # Returns `true` if empty.
   isEmpty: ->
     @getMethods().every (method) -> not /^public$/i.test(method.doc.status)
-
-  # Public: Get a JSON representation of the object
-  #
-  # Returns the JSON object (a {Object}).
-  toJSON: ->
-    json =
-      file: @getFileName()
-      path: @getPath()
-      methods: []
-      variables: []
-
-    for method in @getMethods()
-      json.methods.push method.toJSON()
-
-    for variable in @getVariables()
-      json.variables.push variable.toJSON()
-
-    json

@@ -242,44 +242,9 @@ module.exports = class Class extends Node
   # Public: Get all methods.
   #
   # Returns the methods as an {Array}.
-  getMethods: ->
-    @methods.filter (method) =>
-      if @options.private and method.doc.isPrivate()
-        true
-      else if @options.internal && method.doc.isInternal()
-        true
-      else
-        method.doc.isPublic()
+  getMethods: -> @methods
 
   # Public: Get all variables.
   #
   # Returns the variables as an {Array}.
   getVariables: -> @variables
-
-  # Public: Get a JSON representation of the object
-  #
-  # Returns the JSON object (an {Object})
-  toJSON: ->
-    json =
-      file: @getFileName()
-      doc: @getDoc().toJSON()
-      class:
-        className: @getClassName()
-        name: @getName()
-        namespace: @getNamespace()
-        parent: @getParentClassName()
-      location: @getLocation()
-      methods: []
-      variables: []
-      properties: []
-
-    for method in @getMethods()
-      json.methods.push method.toJSON()
-
-    for variable in @getVariables()
-      json.variables.push variable.toJSON()
-
-    for property in @properties
-      json.properties.push property.toJSON()
-
-    json

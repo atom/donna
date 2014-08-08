@@ -118,17 +118,3 @@ module.exports = class VirtualMethod extends Node
   #
   # Returns the JavaScript source (a {String}).
   getJavaScriptSource: ->
-
-  # Public: Get a JSON representation of the object
-  #
-  # Returns the JSON object (a {Object}).
-  toJSON: ->
-    json =
-      doc: @doc
-      type: @getType()
-      signature: @getSignature()
-      name: @getName()
-      bound: false
-      parameters: []
-
-    json

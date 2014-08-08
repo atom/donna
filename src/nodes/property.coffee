@@ -64,16 +64,3 @@ module.exports = class Property extends Node
 
     catch error
       console.warn('Get property signature error:', @node, error) if @options.verbose
-
-  # Public: Get a JSON representation of the object
-  #
-  # Returns the JSON object (a {Object})
-  toJSON: ->
-    {
-      name: @name
-      signature: @getSignature()
-      location: @getLocation()
-      setter: @setter
-      getter: @getter
-      doc: @doc
-    }

@@ -8,12 +8,14 @@ Class         = require './nodes/class'
 Mixin         = require './nodes/mixin'
 VirtualMethod = require './nodes/virtual_method'
 
-{whitespace} = require './util/text'
 {SourceMapConsumer} = require 'source-map'
+
+# FIXME: The only reason we use the parser right now is for comment conversion.
+# We need to convert the comments to block comments so they show up in the AST.
+# This could be done by the {Metadata} class, but just isnt at this point.
 
 # Public: This parser is responsible for converting each file into the intermediate /
 # AST representation as a JSON node.
-#
 module.exports = class Parser
 
   # Public: Construct the parser
@@ -215,7 +217,6 @@ module.exports = class Parser
               indentComment = ""
 
             globalCount++
-            # comment.push whitespace(indentComment) + '### ' + commentLine[2]?.replace /#/g, "\u0091#"
             # we place these here to indicate that the method had a global status applied
             result.push("#{indentComment}###~#{@globalStatus}~###") unless /require/.test(line)
 
@@ -235,139 +236,8 @@ module.exports = class Parser
       child.ancestor = node
       @linkAncestors child
 
-  # Public: Get all the parsed methods.
-  #
-  # Returns an {Array} of {Method}s.
-  getAllMethods: ->
-    unless @methods
-      @methods = []
-
-      @convertPrototypes()
-
-      for file in @files
-        @methods = _.union @methods, file.getMethods()
-
-      for clazz in @classes
-        @methods = _.union @methods, clazz.getMethods()
-
-      for mixin in @mixins
-        @methods = _.union @methods, mixin.getMethods()
-
-    @methods
-
-  # Public: Get all parsed variables.
-  #
-  # Returns an {Array} of {Variable}s.
-  getAllVariables: ->
-    unless @variables
-      @variables = []
-
-    for file in @files
-      @variables = _.union @variables, file.getVariables()
-
-    for clazz in @classes
-      @variables = _.union @variables, clazz.getVariables()
-
-    for mixin in @mixins
-      @methods = _.union @methods, mixin.getMethods()
-
-    @variables
-
-  # Public: Show the final parsing statistics.
-  showResult: (generator) ->
-    fileCount      = @files.length
-
-    classCount     = @classes.length
-    noDocClasses   = _.filter(@classes, (clazz) -> !clazz.getDoc().hasComment())
-    noDocClassesLength   = noDocClasses.length
-
-    mixinCount     = @mixins.length
-
-    methodsToCount = _.filter(@getAllMethods(), (method) -> method not instanceof VirtualMethod)
-    methodCount    = methodsToCount.length
-    noDocMethods   = _.filter methodsToCount, (method) ->
-      if method.entity?.doc?
-        method.entity.doc.isPublic() and method.doc.isPublic() and not method.doc.hasComment()
-      else
-        method.doc.isPublic() and not method.doc.hasComment()
-
-    noDocMethodsLength = noDocMethods.length
-
-    constants      = _.filter(@getAllVariables(), (variable) -> variable.isConstant())
-    constantCount  = constants.length
-    noDocConstants = _.filter(constants, (constant) -> !constant.getDoc().hasComment()).length
-
-    totalFound = (classCount + methodCount + constantCount)
-    totalNoDoc = (noDocClassesLength + noDocMethodsLength + noDocConstants)
-    documented   = 100 - 100 / (classCount + methodCount + constantCount) * (noDocClassesLength + noDocMethodsLength + noDocConstants)
-
-    maxCountLength = String(_.max([fileCount, mixinCount, classCount, methodCount, constantCount], (count) -> String(count).length)).length + 6
-    maxNoDocLength = String(_.max([noDocClassesLength, noDocMethodsLength, noDocConstants], (count) -> String(count).length)).length
-
-    stats =
-      """
-      Parsed files:    #{ _.str.pad(@fileCount, maxCountLength) }
-      Classes:         #{ _.str.pad(classCount, maxCountLength) } (#{ _.str.pad(noDocClassesLength, maxNoDocLength) } undocumented)
-      Mixins:          #{ _.str.pad(mixinCount, maxCountLength) }
-      Non-Class files: #{ _.str.pad(fileCount, maxCountLength) }
-      Methods:         #{ _.str.pad(methodCount, maxCountLength) } (#{ _.str.pad(noDocMethodsLength, maxNoDocLength) } undocumented)
-      Constants:       #{ _.str.pad(constantCount, maxCountLength) } (#{ _.str.pad(noDocConstants, maxNoDocLength) } undocumented)
-       #{ _.str.sprintf('%.2f', documented) }% documented (#{totalFound} total, #{totalNoDoc} with no doc)
-       #{generator.referencer.errors} errors
-      """
-
-    if @options.missing
-      require 'colors'
-      noDocClassNames = []
-      for noDocClass in noDocClasses
-        noDocClassNames.push noDocClass.className.cyan
-
-      noDocMethodNames = []
-      noDocMethods.sort (method1, method2) ->
-        method1.getShortSignature().localeCompare(method2.getShortSignature())
-      noDocMethods = _.groupBy noDocMethods, ({entity}) -> entity.fileName
-      for fileName, methods of noDocMethods
-        noDocMethodNames.push "\n#{fileName}".cyan
-        for noDocMethod in methods
-          noDocMethodNames.push "  #{noDocMethod.getShortSignature()}"
-
-      stats += "\nClasses missing docs:\n\n#{noDocClassNames.join('\n')}" if noDocClassNames.length > 0
-      stats += "\n\nMethods missing docs:\n#{noDocMethodNames.join('\n')}" if noDocMethodNames.length > 0
-
-    console.log stats
-
-    if @options.json && @options.json.length
-      fs.writeFileSync @options.json, JSON.stringify(@toJSON(), null, "    ");
-
-  # Private: Moves prototypes found in Files to proper locations in Classes
-  convertPrototypes: ->
-    _.each @files, (file) =>
-      file.methods = _.filter file.methods, (method) =>
-        [className, methodName] = method.name.split(/\.prototype\./)
-        _.every @classes, (clazz) =>
-          if className == clazz.getClassName()
-            method.doc['originalFilename'] = method.entity.fileName
-            method.doc['originalName'] = methodName
-            method.doc['originalType'] = "instance"
-            clazz.methods.push(method)
-            return false
-          return true
-
-  # Public: Get a JSON representation of the object.
-  #
-  # Returns the JSON {Object}.
-  toJSON: ->
-    json = []
-
-    @convertPrototypes()
-
-    for file in @files
-      json.push file.toJSON()
-
-    for clazz in @classes
-      json.push clazz.toJSON()
-
-    for mixin in @mixins
-      json.push mixin.toJSON()
-
-    json
+whitespace = (n) ->
+  a = []
+  while a.length < n
+    a.push ' '
+  a.join ''

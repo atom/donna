@@ -94,15 +94,3 @@ module.exports = class Parameter extends Node
 
     catch error
       console.warn('Get parameter splat type error:', @node, error) if @options.verbose
-
-  # Public: Get a JSON representation of the object
-  #
-  # Returns the JSON object (a {Object}).
-  toJSON: (i = -1) ->
-    json =
-      name: @getName(i)
-      default: @getDefault(i)
-      splat: @isSplat()
-      optionized: @optionized
-
-    json

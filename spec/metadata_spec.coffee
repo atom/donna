@@ -9,7 +9,8 @@ Metadata = require '../src/metadata'
 
 {diff}    = require 'jsondiffpatch'
 _         = require 'underscore'
-_.str     = require 'underscore.string'
+
+CoffeeScript = require 'coffee-script'
 
 require 'jasmine-focused'
 

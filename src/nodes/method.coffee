@@ -217,24 +217,3 @@ module.exports = class Method extends Node
   # @param [Array<Parameter>] the method parameters
   #
   getParameters: -> @parameters
-
-  # Get a JSON representation of the object
-  #
-  # @return {Object} the JSON object
-  #
-  toJSON: ->
-    json =
-      doc: @getDoc().toJSON()
-      type: @getOriginalType() || @getType()
-      signature: @getSignature()
-      name: @getOriginalName() || @getName()
-      bound: @node.value.bound
-      parameters: []
-      location: @getLocation()
-
-    json["original_filename"] = @getOriginalFilename() if @getOriginalFilename?
-
-    for parameter, i in @getParameters()
-      json.parameters.push(parameter.toJSON(i))
-
-    json

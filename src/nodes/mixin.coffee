@@ -127,26 +127,3 @@ module.exports = class Mixin extends Node
   #
   # Returns an {Array} of all the {Variable}s.
   getVariables: -> @variables
-
-  # Public: Get a JSON representation of the object
-  #
-  # Returns the JSON object (a {Object}).
-  toJSON: ->
-    json =
-      file: @getFileName()
-      doc: @getDoc().toJSON()
-      mixin:
-        mixinName: @getMixinName()
-        name: @getName()
-        namespace: @getNamespace()
-        concern: @concern
-      methods: []
-      variables: []
-
-    for method in @getMethods()
-      json.methods.push method.toJSON()
-
-    for variable in @getVariables()
-      json.variables.push variable.toJSON()
-
-    json

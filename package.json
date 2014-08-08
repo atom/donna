@@ -42,8 +42,8 @@
     "grunt-exec": "0.4.3",
     "grunt-gh-pages": "0.9.0",
     "jasmine-node": ">= 1.0.13",
+    "jasmine-json": "~0.0",
     "jasmine-focused": ">= 1.0.5",
-    "jsondiffpatch": "~0.1",
     "grunt-cli": "~0.1.13"
   },
   "homepage": "https://github.com/atom/metadoc",

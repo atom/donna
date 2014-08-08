@@ -18,11 +18,7 @@
                 15
               ]
             ],
-            "doc": {
-              "comment": "Public: Returns hello ",
-              "summary": "Returns hello",
-              "status": "Public"
-            }
+            "doc": "Public: Returns hello "
           }
         },
         "6": {

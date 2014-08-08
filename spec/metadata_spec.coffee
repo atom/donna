@@ -13,6 +13,7 @@ _         = require 'underscore'
 CoffeeScript = require 'coffee-script'
 
 require 'jasmine-focused'
+require 'jasmine-json'
 
 describe "Metadata", ->
   parser = null
@@ -26,19 +27,9 @@ describe "Metadata", ->
     generated = MetaDoc.populateSlug({ files: {} }, filename, metadata)
 
     expected_filename = filename.replace(/\.coffee$/, '.json')
-    expected = JSON.stringify(JSON.parse(fs.readFileSync expected_filename, 'utf8'), null, 2)
-    generated =  JSON.stringify(generated, null, 2)
+    expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))
 
-    checkDelta(expected_filename, expected, generated, diff(expected, generated))
-
-  checkDelta = (expected_filename, expected, generated, delta) ->
-    if delta?
-      if process.env.BISCOTTO_DEBUG
-        fs.writeFileSync(expected_filename, generated + "\n")
-      else
-        console.error expected, generated
-        console.error(delta)
-        expect(delta).toBe(undefined)
+    expect(generated).toEqualJson(expected)
 
   beforeEach ->
     parser = new Parser({
@@ -107,9 +98,8 @@ describe "Metadata", ->
       slug = MetaDoc.generateMetadataSlug(packageJsonPath, parser, {output: ""})
 
       expected_filename = path.join(test_path, 'test_metadata.json')
-      expected = JSON.stringify(JSON.parse(fs.readFileSync expected_filename, 'utf8'), null, 2)
-      generated =  JSON.stringify(slug, null, 2)
+      expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))
 
-      checkDelta(expected_filename, expected, generated, diff(expected, generated))
+      expect(slug).toEqualJson expected
       expect(_.keys(slug.files)).not.toContain "./Gruntfile.coffee"
       expect(_.keys(slug.files)).not.toContain "./spec/text-buffer-spec.coffee"

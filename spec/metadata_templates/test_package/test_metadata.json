@@ -1,5 +1,7 @@
 {
   "main": "./src/test.coffee",
+  "version": "1.2.3",
+  "repository": "git://github.com/atom/zomgwowcats.git",
   "files": {
     "./src/point.coffee": {
       "objects": {

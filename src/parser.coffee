@@ -70,7 +70,7 @@ module.exports = class Parser
 
     # Find top-level methods and constants that aren't within a class
     fileClass = new File(root, file, lineMapping, @options)
-    @files.push(fileClass) unless fileClass.isEmpty()
+    @files.push(fileClass)
 
     @linkAncestors root
 

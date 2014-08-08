@@ -105,16 +105,13 @@ module.exports = class Metadata
 
               switch @defs[exp.variable.base.value].type
                 when 'function'
-                  doc = null
-                  # fetch method from file
-                  _.each @files, (file) =>
-                    file.methods = _.filter file.methods, (method) =>
+                  # FIXME: Ugh. This is so fucked. We shouldnt match on name in all the files in the entire project.
+                  for file in @files
+                    for method in file.methods
                       if @defs[exp.variable.base.value].name == method.name
-                        doc = method.doc
-                        return true
-                      return false
+                        @defs[exp.variable.base.value].doc = method.doc.comment
+                        break
 
-                  @defs[exp.variable.base.value].doc = doc
           when 'Obj'
             for key in exp.variable.base.objects
               switch key.constructor.name

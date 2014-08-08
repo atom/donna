@@ -6,6 +6,7 @@
           "0": {
             "type": "class",
             "name": "TextBuffer",
+            "bindingType": null,
             "classProperties": [
               [
                 4,
@@ -48,6 +49,7 @@
         "6": {
           "0": {
             "type": "class",
+            "bindingType": null,
             "name": "DisplayBuffer",
             "classProperties": [
               [

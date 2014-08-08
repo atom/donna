@@ -81,9 +81,3 @@ module.exports = class File extends Class
     path = Path.dirname @getFullName()
     path = '' if path is '.'
     path
-
-  # Public: Test if the file doesn't contain any top-level public methods.
-  #
-  # Returns `true` if empty.
-  isEmpty: ->
-    @getMethods().every (method) -> not /^public$/i.test(method.doc.status)

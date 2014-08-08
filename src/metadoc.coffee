@@ -223,18 +223,6 @@ module.exports = class MetaDoc
         file = file.substring(1, file.length) if file.match /^\.\./
         return file
 
-  # Public: Get the MetaDoc script content that is used in the webinterface
-  #
-  # Returns the script contents as a {String}.
-  @script: ->
-    @metadocScript or= fs.readFileSync path.join(__dirname, '..', 'theme', 'default', 'assets', 'metadoc.js'), 'utf-8'
-
-  # Public: Get the MetaDoc style content that is used in the webinterface
-  #
-  # Returns the style content as a {String}.
-  @style: ->
-    @metadocStyle or= fs.readFileSync path.join(__dirname, '..', 'theme', 'default', 'assets', 'metadoc.css'), 'utf-8'
-
   # Public: Find the source directories.
   @detectSources: (done) ->
     Async.filter SRC_DIRS, fs.exists, (results) ->

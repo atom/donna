@@ -21,7 +21,7 @@ module.exports = class Parser
   # Public: Construct the parser
   #
   # options - An {Object} of options
-  constructor: (@options) ->
+  constructor: (@options={}) ->
     @files   = []
     @classes = []
     @mixins  = []

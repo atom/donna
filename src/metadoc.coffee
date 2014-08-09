@@ -61,22 +61,16 @@ generateMetadata = (inputs) ->
     if stats.isDirectory()
       for filename in walkdir.sync input
         if isAcceptableFile(filename) and isInAcceptableDir(absoluteInput, filename)
-          console.log absoluteInput, filename
-
           try
-            relativePath = filename
-            relativePath = path.normalize(filename.replace(process.cwd(), ".#{path.sep}")) if filename.indexOf(process.cwd()) == 0
-            parser.parseFile relativePath
+            parser.parseFile(filename, absoluteInput)
           catch error
-            throw error if options.debug
-            console.log "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
+            console.warn "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
     else
       if isAcceptableFile(input)
         try
-          parser.parseFile input
+          parser.parseFile(input, path.dirname(input))
         catch error
-          throw error if options.debug
-          console.log "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
+          console.warn "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
 
     metadataSlugs.push generateMetadataSlug(packageJsonPath, parser)
 
@@ -115,9 +109,8 @@ generateMetadataSlug = (packageJsonPath, parser) ->
     files: {}
 
   for filename, content of parser.iteratedFiles
-    relativeFilename = path.relative(packageJsonPath, filename)
     metadata.generate(CoffeeScript.nodes(content))
-    populateSlug(slug, relativeFilename, metadata)
+    populateSlug(slug, filename, metadata)
 
   slug
 
@@ -134,13 +127,12 @@ populateSlug = (slug, filename, {defs:unindexedObjects, exports:exports}) ->
       value.classProperties = ( [prop.range[0][0], prop.range[0][1]] for prop in _.clone(value.classProperties))
       value.prototypeProperties = ([prop.range[0][0], prop.range[0][1]] for prop in _.clone(value.prototypeProperties))
 
-  if exports._default
-    exports = exports._default.range[0][0]
+  if exports._default?
+    exports = exports._default.range[0][0] if exports._default.range?
   else
     for key, value of exports
       exports[key] = value.startLineNumber
 
-  filename = filename.substring(1, filename.length) if filename.match /^\.\./
   slug["files"][filename] = {objects, exports}
   slug
 

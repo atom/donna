@@ -253,7 +253,7 @@ module.exports = class Metadata
   evalCode: (exp) ->
     bindingType: 'variable'
     type: 'function'
-    paramNames: _.map exp.params, (param) -> param.name.value
+    paramNames: _.map(exp.params, ((param) -> param.name.value))
     range: [ [exp.locationData.first_line, exp.locationData.first_column], [exp.locationData.last_line, exp.locationData.last_column ] ]
     doc: null
 

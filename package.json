@@ -4,16 +4,10 @@
   "keywords": [
     "coffeescript",
     "doc",
-    "api",
-    "tomdoc"
+    "api"
   ],
-  "author": "Garen J. Torikian <gjtorikian@gmail.com>",
-  "maintainers": [
-    {
-      "name": "Ben Ogle"
-    }
-  ],
-  "version": "2.2.4",
+  "author": "Ben Ogle <ben.ogle@github.com>",
+  "version": "0.0.0",
   "engines": {
     "node": ">=0.10.0"
   },

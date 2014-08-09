@@ -1,11 +1,12 @@
-fs           = require 'fs'
-_            = require 'underscore'
-_.str        = require 'underscore.string'
+fs = require 'fs'
+path = require 'path'
+_ = require 'underscore'
+_.str = require 'underscore.string'
 CoffeeScript = require 'coffee-script'
 
-File          = require './nodes/file'
-Class         = require './nodes/class'
-Mixin         = require './nodes/mixin'
+File = require './nodes/file'
+Class = require './nodes/class'
+Mixin = require './nodes/mixin'
 VirtualMethod = require './nodes/virtual_method'
 
 {SourceMapConsumer} = require 'source-map'
@@ -26,21 +27,18 @@ module.exports = class Parser
     @classes = []
     @mixins  = []
     @iteratedFiles = {}
-
     @fileCount = 0
     @globalStatus = "Private"
 
-    @classMemberRegex = """
-
-                        """
-
   # Public: Parse the given CoffeeScript file.
   #
-  # file - A {String} representing the the CoffeeScript filename
-  parseFile: (file) ->
-    content = fs.readFileSync(file, 'utf8')
-    @parseContent content, file
-    @iteratedFiles[file] = content
+  # filePath - {String} absolute path name
+  parseFile: (filePath, relativeTo) ->
+    content = fs.readFileSync(filePath, 'utf8')
+    relativePath = path.normalize(filePath.replace(relativeTo, ".#{path.sep}"))
+    console.log relativePath
+    @parseContent(content, relativePath)
+    @iteratedFiles[relativePath] = content
     @fileCount += 1
 
   # Public: Parse the given CoffeeScript content.

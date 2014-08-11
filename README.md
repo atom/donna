@@ -27,7 +27,7 @@ class TextBuffer
   @method2: (a) ->
 ```
 
-Generates
+Generates metadata:
 
 ```json
 {

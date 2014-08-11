@@ -1,6 +1,7 @@
 # Donna
 
-Donna is a tool for generating [CoffeeScript](http://coffeescript.org/) metadata. The underlying architecture is sorta based on [codo](https://github.com/coffeedoc/codo) and [codo](https://github.com/atom/biscotto)
+Donna is a tool for generating [CoffeeScript](http://coffeescript.org/)
+metadata. It was forked from [biscotto](https://github.com/atom/biscotto)
 
 ## What's it do??
 

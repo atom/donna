@@ -10,6 +10,8 @@ The Donna [metadata][meta] format is a very raw format indicating the locations
 of objects like classes, functions and imports within files of a CoffeeScript
 module. Included in the metadata are unmolested doc strings for these objects.
 
+An Example:
+
 ```coffee
 # Public: A mutable text container with undo/redo support and the ability to
 # annotate logical regions in the text.
@@ -162,3 +164,4 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [meta]:https://github.com/atom/donna/blob/master/spec/metadata_templates/test_package/test_metadata.json
+[atomdoc]:https://github.com/atom/atomdoc

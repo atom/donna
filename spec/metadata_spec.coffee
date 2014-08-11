@@ -92,7 +92,7 @@ describe "Metadata", ->
       test_path = path.join("spec", "metadata_templates", "test_package")
       packageJsonPath = path.join(test_path, 'package.json')
       for file in fs.readdirSync(path.join(test_path, "src"))
-        parser.parseFile path.join(test_path, "src", file)
+        parser.parseFile path.join(test_path, "src", file), test_path
 
     it "renders the package correctly", ->
       slug = Donna.generateMetadataSlug(packageJsonPath, parser, {output: ""})

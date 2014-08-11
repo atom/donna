@@ -3,7 +3,7 @@
   "version": "1.2.3",
   "repository": "git://github.com/atom/zomgwowcats.git",
   "files": {
-    "./src/point.coffee": {
+    "src/point.coffee": {
       "objects": {
         "11": {
           "0": {
@@ -254,7 +254,7 @@
       },
       "exports": 11
     },
-    "./src/range.coffee": {
+    "src/range.coffee": {
       "objects": {
         "0": {
           "7": {
@@ -511,7 +511,7 @@
       },
       "exports": 17
     },
-    "./src/test.coffee": {
+    "src/test.coffee": {
       "objects": {
         "0": {
           "8": {

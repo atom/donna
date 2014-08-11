@@ -7,7 +7,7 @@ for the purpose of generating API documentation. It was forked from
 ## Metadata??
 
 The Donna [metadata][meta] format is a very raw format indicating the locations
-of objects like classes, functions and imports within files of a CoffeeScript
+of objects like classes, functions, and imports within files of a CoffeeScript
 module. Included in the metadata are unmolested doc strings for these objects.
 
 An Example:

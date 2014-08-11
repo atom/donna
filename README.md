@@ -1,7 +1,7 @@
 # Donna
 
 Donna is a tool for generating [CoffeeScript](http://coffeescript.org/) metadata
-for the purpose of API documentation. It was forked from
+for the purpose of generating API documentation. It was forked from
 [biscotto](https://github.com/atom/biscotto).
 
 ## Metadata??

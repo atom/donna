@@ -1,5 +1,5 @@
 {
-  "name": "metadoc",
+  "name": "donna",
   "description": "A CoffeeScript documentation generator.",
   "keywords": [
     "coffeescript",
@@ -11,9 +11,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./src/metadoc",
+  "main": "./src/donna",
   "bin": {
-    "metadoc": "./bin/metadoc"
+    "donna": "./bin/donna"
   },
   "dependencies": {
     "coffee-script": ">= 1.6.2",
@@ -40,10 +40,10 @@
     "jasmine-focused": ">= 1.0.5",
     "grunt-cli": "~0.1.13"
   },
-  "homepage": "https://github.com/atom/metadoc",
+  "homepage": "https://github.com/atom/donna",
   "repository": {
     "type": "git",
-    "url": "git://github.com/atom/metadoc.git"
+    "url": "git://github.com/atom/donna.git"
   },
   "scripts": {
     "test": "grunt test"

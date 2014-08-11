@@ -3,7 +3,7 @@ path    = require 'path'
 
 {inspect} = require 'util'
 walkdir = require 'walkdir'
-MetaDoc = require '../src/metadoc'
+Donna = require '../src/donna'
 Parser  = require '../src/parser'
 Metadata = require '../src/metadata'
 
@@ -24,7 +24,7 @@ describe "Metadata", ->
     parser.parseContent source, filename
     metadata = new Metadata({}, parser)
     metadata.generate(CoffeeScript.nodes(source))
-    generated = MetaDoc.populateSlug({ files: {} }, filename, metadata)
+    generated = Donna.populateSlug({ files: {} }, filename, metadata)
 
     expected_filename = filename.replace(/\.coffee$/, '.json')
     expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))
@@ -95,7 +95,7 @@ describe "Metadata", ->
         parser.parseFile path.join(test_path, "src", file)
 
     it "renders the package correctly", ->
-      slug = MetaDoc.generateMetadataSlug(packageJsonPath, parser, {output: ""})
+      slug = Donna.generateMetadataSlug(packageJsonPath, parser, {output: ""})
 
       expected_filename = path.join(test_path, 'test_metadata.json')
       expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))

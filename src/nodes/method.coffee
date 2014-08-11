@@ -13,7 +13,7 @@ module.exports = class Method extends Node
   # entity - The method's {Class}
   # node - The method node (a {Object})
   # fileName - The filename (a {String})
-  # lineMapping - An object mapping the actual position of a member to its MetaDoc one
+  # lineMapping - An object mapping the actual position of a member to its Donna one
   # options - The parser options (a {Object})
   # comment - The comment node (a {Object})
   constructor: (@entity, @node, @lineMapping, @options, comment) ->

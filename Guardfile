@@ -1,7 +1,7 @@
 notification :gntp
 
-group :metadoc do
-  # CoffeeScript for the metadoc library
+group :donna do
+  # CoffeeScript for the donna library
   guard :coffeescript, input: 'src', output: 'lib', noop: true
 
   # Run Jasmine specs
@@ -10,9 +10,9 @@ group :metadoc do
     watch(%r{src|spec}) { `#{jasmine_node} --coffee --color spec/parser_spec.coffee` }
   end
 
-  # Generate metadoc doc
+  # Generate donna doc
   guard :shell do
-    watch(%r{src|theme}) { `./bin/metadoc` }
+    watch(%r{src|theme}) { `./bin/donna` }
   end
 end
 

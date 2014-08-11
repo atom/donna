@@ -8,7 +8,7 @@ module.exports = class Variable extends Node
   #
   # entity - The variable's {Class}
   # node - The variable node (a {Object})
-  # lineMapping - An object mapping the actual position of a member to its MetaDoc one
+  # lineMapping - An object mapping the actual position of a member to its Donna one
   # options - The parser options (a {Object})
   # classType - A {Boolean} indicating if the class is a `class` or an `instance`
   # comment - The comment node (a {Object})

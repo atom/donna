@@ -23,7 +23,7 @@ module.exports = class Metadata
     @["eval#{exp.constructor.name}"](exp)
 
   visitComment: (exp) ->
-    # Skip the 1st comment which is added by metadoc
+    # Skip the 1st comment which is added by donna
     return if exp.comment is '~Private~'
 
   visitClass: (exp) ->

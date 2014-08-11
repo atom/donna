@@ -15,7 +15,7 @@ module.exports = (grunt) ->
       test:
         command: "./node_modules/jasmine-node/bin/jasmine-node --coffee spec"
       build_docs:
-        command: "./bin/metadoc src/"
+        command: "./bin/donna src/"
 
     'gh-pages':
       options:

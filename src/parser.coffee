@@ -36,7 +36,6 @@ module.exports = class Parser
   parseFile: (filePath, relativeTo) ->
     content = fs.readFileSync(filePath, 'utf8')
     relativePath = path.normalize(filePath.replace(relativeTo, ".#{path.sep}"))
-    console.log relativePath
     @parseContent(content, relativePath)
     @iteratedFiles[relativePath] = content
     @fileCount += 1
@@ -116,7 +115,7 @@ module.exports = class Parser
     root
 
   # Public: Converts the comments to block comments, so they appear in the node structure.
-  # Only block comments are considered by MetaDoc.
+  # Only block comments are considered by Donna.
   #
   # content - A {String} representing the CoffeeScript file content
   convertComments: (content) ->

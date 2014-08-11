@@ -1,12 +1,12 @@
-# Contribute to MetaDoc
+# Contribute to Donna
 
 ## Report issues
 
-Issues hosted at [GitHub Issues](https://github.com/atom/metadoc/issues).
+Issues hosted at [GitHub Issues](https://github.com/atom/donna/issues).
 
 ## Development
 
-Source hosted at [GitHub](https://github.com/atom/metadoc).
+Source hosted at [GitHub](https://github.com/atom/donna).
 
 Pull requests are very welcome! Please try to follow these simple rules if applicable:
 

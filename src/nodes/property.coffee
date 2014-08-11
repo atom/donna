@@ -22,7 +22,7 @@ module.exports = class Property extends Node
   #
   # entity - The property's {Class}
   # node - The property node (a {Object})
-  # lineMapping - An object mapping the actual position of a member to its MetaDoc one
+  # lineMapping - An object mapping the actual position of a member to its Donna one
   # options - The parser options (a {Object})
   # name - The filename (a {String})
   # comment - The comment node (a {Object})

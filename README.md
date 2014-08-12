@@ -123,6 +123,15 @@ format from Donna output.
 npm install donna
 ```
 
+### From your code
+
+```coffee
+donna = require 'donna'
+metadata = donna.generateMetadata(['/path/to/my-module', '/path/to/another-module'])
+```
+
+### From the command line
+
 Pass it the _top level_ directory of your module. It will read the
 `package.json` file and index any `.coffee` files from within the `src`, `app`,
 or `lib` directories:

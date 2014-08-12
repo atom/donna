@@ -82,13 +82,19 @@ describe "Metadata", ->
     it 'understands importing', ->
       constructDelta("spec/metadata_templates/requires/references/buffer-patch.coffee")
 
+  describe "when metadata is generated from multiple packages", ->
+    fit 'each slug contains only those files in the respective packages', ->
+      singleFile = "spec/metadata_templates/requires/multiple_requires_single_line.coffee"
+      realPackagePath = path.join("spec", "metadata_templates", "test_package")
+
+      metadata = Donna.generateMetadata([singleFile, realPackagePath])
+
+      expect(_.keys metadata[0].files).toEqual ['multiple_requires_single_line.coffee']
+      expect(_.keys metadata[1].files).not.toContain 'multiple_requires_single_line.coffee'
+
   describe "A real package", ->
-    test_path = null
-
-    beforeEach ->
-      test_path = path.join("spec", "metadata_templates", "test_package")
-
     it "renders the package correctly", ->
+      test_path = path.join("spec", "metadata_templates", "test_package")
       slug = Donna.generateMetadata([test_path])[0]
 
       expected_filename = path.join(test_path, 'test_metadata.json')

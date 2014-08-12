@@ -47,11 +47,11 @@ main = ->
   writeMetadata(generateMetadata(options.inputs), options.output)
 
 generateMetadata = (inputs) ->
-  parser = new Parser()
   metadataSlugs = []
 
   for input in inputs
     continue unless (fs.existsSync || path.existsSync)(input)
+    parser = new Parser()
 
     # collect probable package.json path
     packageJsonPath = path.join(input, 'package.json')

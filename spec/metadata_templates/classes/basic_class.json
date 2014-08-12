@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/classes/basic_class.coffee": {
+    "basic_class.coffee": {
       "objects": {
         "4": {
           "0": {

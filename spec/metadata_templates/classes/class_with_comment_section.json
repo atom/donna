@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/classes/class_with_comment_section.coffee": {
+    "class_with_comment_section.coffee": {
       "objects": {
         "3": {
           "0": {

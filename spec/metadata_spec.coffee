@@ -19,12 +19,10 @@ describe "Metadata", ->
   parser = null
 
   constructDelta = (filename, hasReferences = false) ->
-    source = fs.readFileSync filename, 'utf8'
-
-    parser.parseContent source, filename
-    metadata = new Metadata({}, parser)
-    metadata.generate(CoffeeScript.nodes(source))
-    generated = Donna.populateSlug({ files: {} }, filename, metadata)
+    generated = Donna.generateMetadata([filename])[0]
+    delete generated.version
+    delete generated.repository
+    delete generated.main
 
     expected_filename = filename.replace(/\.coffee$/, '.json')
     expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))

@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/exports/class_exports.coffee": {
+    "class_exports.coffee": {
       "objects": {
         "1": {
           "0": {

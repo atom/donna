@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/classes/classes_with_similar_methods.coffee": {
+    "classes_with_similar_methods.coffee": {
       "objects": {
         "2": {
           "0": {

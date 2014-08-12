@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/requires/multiple_requires_single_line.coffee": {
+    "multiple_requires_single_line.coffee": {
       "objects": {
         "0": {
           "1": {

@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/requires/requires_with_colon.coffee": {
+    "requires_with_colon.coffee": {
       "objects": {
         "0": {
           "14": {

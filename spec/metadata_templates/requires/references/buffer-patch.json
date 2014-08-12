@@ -1,6 +1,6 @@
 {
   "files": {
-    "spec/metadata_templates/requires/references/buffer-patch.coffee": {
+    "buffer-patch.coffee": {
       "objects": {
         "0": {
           "1": {

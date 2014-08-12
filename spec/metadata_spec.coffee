@@ -83,17 +83,13 @@ describe "Metadata", ->
       constructDelta("spec/metadata_templates/requires/references/buffer-patch.coffee")
 
   describe "A real package", ->
-    packageJsonPath = null
     test_path = null
 
     beforeEach ->
       test_path = path.join("spec", "metadata_templates", "test_package")
-      packageJsonPath = path.join(test_path, 'package.json')
-      for file in fs.readdirSync(path.join(test_path, "src"))
-        parser.parseFile path.join(test_path, "src", file), test_path
 
     it "renders the package correctly", ->
-      slug = Donna.generateMetadataSlug(packageJsonPath, parser, {output: ""})
+      slug = Donna.generateMetadata([test_path])[0]
 
       expected_filename = path.join(test_path, 'test_metadata.json')
       expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))

@@ -47,6 +47,9 @@ describe "Metadata", ->
     it 'understands descriptions', ->
       constructDelta("spec/metadata_templates/classes/basic_class.coffee")
 
+    it 'understands subclassing', ->
+      constructDelta("spec/metadata_templates/classes/class_with_super_class.coffee")
+
     it 'understands class properties', ->
       constructDelta("spec/metadata_templates/classes/class_with_class_properties.coffee")
 
@@ -83,7 +86,7 @@ describe "Metadata", ->
       constructDelta("spec/metadata_templates/requires/references/buffer-patch.coffee")
 
   describe "when metadata is generated from multiple packages", ->
-    fit 'each slug contains only those files in the respective packages', ->
+    it 'each slug contains only those files in the respective packages', ->
       singleFile = "spec/metadata_templates/requires/multiple_requires_single_line.coffee"
       realPackagePath = path.join("spec", "metadata_templates", "test_package")
 

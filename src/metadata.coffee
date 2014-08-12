@@ -159,6 +159,7 @@ module.exports = class Metadata
 
   evalClass: (exp) ->
     className = exp.variable.base.value
+    superClassName = exp.parent?.base.value
     classProperties = []
     prototypeProperties = []
 
@@ -244,6 +245,7 @@ module.exports = class Metadata
 
     type: 'class'
     name: className
+    superClass: superClassName
     bindingType: @bindingTypes[className] unless _.isUndefined @bindingTypes[className]
     classProperties: classProperties
     prototypeProperties: prototypeProperties

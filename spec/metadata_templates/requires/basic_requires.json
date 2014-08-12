@@ -80,6 +80,7 @@
           "0": {
             "type": "class",
             "name": "Bar",
+            "superClass": null,
             "bindingType": null,
             "classProperties": [],
             "prototypeProperties": [],

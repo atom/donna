@@ -6,6 +6,7 @@
           "0": {
             "type": "class",
             "name": "Foo",
+            "superClass": null,
             "bindingType": "exports",
             "classProperties": [],
             "prototypeProperties": [],

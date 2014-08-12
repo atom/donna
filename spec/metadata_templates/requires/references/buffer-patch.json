@@ -25,6 +25,7 @@
           "0": {
             "type": "class",
             "name": "TextBuffer",
+            "superClass": null,
             "bindingType": "exports",
             "classProperties": [],
             "prototypeProperties": [

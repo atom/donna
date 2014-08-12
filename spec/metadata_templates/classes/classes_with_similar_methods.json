@@ -6,6 +6,7 @@
           "0": {
             "type": "class",
             "name": "TextBuffer",
+            "superClass": null,
             "bindingType": null,
             "classProperties": [
               [
@@ -49,6 +50,7 @@
         "6": {
           "0": {
             "type": "class",
+            "superClass": null,
             "bindingType": null,
             "name": "DisplayBuffer",
             "classProperties": [

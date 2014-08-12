@@ -9,6 +9,7 @@
           "0": {
             "type": "class",
             "name": "Point",
+            "superClass": null,
             "bindingType": "exports",
             "classProperties": [
               [
@@ -334,6 +335,7 @@
           "0": {
             "type": "class",
             "name": "Range",
+            "superClass": null,
             "bindingType": "exports",
             "classProperties": [
               [
@@ -553,6 +555,7 @@
           "0": {
             "type": "class",
             "name": "TestClass",
+            "superClass": null,
             "bindingType": "exports",
             "classProperties": [
               [

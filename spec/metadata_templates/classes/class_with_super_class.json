@@ -1,12 +1,12 @@
 {
   "files": {
-    "basic_class.coffee": {
+    "class_with_super_class.coffee": {
       "objects": {
         "4": {
           "0": {
             "type": "class",
             "name": "TextBuffer",
-            "superClass": null,
+            "superClass": "String",
             "bindingType": "exports",
             "classProperties": [],
             "prototypeProperties": [],
@@ -18,7 +18,7 @@
               ],
               [
                 4,
-                15
+                30
               ]
             ]
           }

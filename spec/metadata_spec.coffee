@@ -1,5 +1,5 @@
-fs      = require 'fs'
-path    = require 'path'
+fs = require 'fs'
+path = require 'path'
 
 {inspect} = require 'util'
 walkdir = require 'walkdir'
@@ -7,8 +7,7 @@ Donna = require '../src/donna'
 Parser  = require '../src/parser'
 Metadata = require '../src/metadata'
 
-{diff}    = require 'jsondiffpatch'
-_         = require 'underscore'
+_ = require 'underscore'
 
 CoffeeScript = require 'coffee-script'
 

@@ -77,6 +77,9 @@ generateMetadata = (inputs) ->
   metadataSlugs
 
 isAcceptableFile = (filePath) ->
+  try
+    return false if fs.statSync(filePath).isDirectory()
+
   for file in BLACKLIST_FILES
     return false if new RegExp(file+'$').test(filePath)
 

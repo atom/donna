@@ -76,12 +76,13 @@ module.exports = class Metadata
 
       # case left-hand-side is anything other than `exports...`
       else
-        # Handle 4 common cases:
+        # Handle 5 common cases:
         #
         # X     = ...
         # {X}   = ...
         # {X:Y} = ...
         # X.y   = ...
+        # [X]   = ...
         switch exp.variable.base.constructor.name
           when 'Literal'
             # Something we dont care about is on the right side of the `=`.
@@ -112,7 +113,7 @@ module.exports = class Metadata
                         @defs[exp.variable.base.value].doc = method.doc.comment
                         break
 
-          when 'Obj'
+          when 'Obj', 'Arr'
             for key in exp.variable.base.objects
               switch key.constructor.name
                 when 'Value'
@@ -135,8 +136,7 @@ module.exports = class Metadata
                   return no # Do not continue visiting X
 
                 else throw new Error "BUG: Unsupported require Obj structure: #{key.constructor.name}"
-
-          else throw new Error "BUG: Unsupported require structure: #{variable.base.constructor.name}"
+          else throw new Error "BUG: Unsupported require structure: #{exp.variable.base.constructor.name}"
 
   visitCode: (exp) ->
 

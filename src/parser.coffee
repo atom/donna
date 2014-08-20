@@ -151,7 +151,7 @@ module.exports = class Parser
             if !/^\s*\w+:/.test(commentText)
               commentText = @globalStatus + ": " + commentText
             inComment = true
-            indentComment =  commentLine[1].length - 1
+            indentComment = commentLine[1].length - 1
             commentText = "### #{commentText}"
 
           comment.push whitespace(indentComment) + commentText
@@ -214,8 +214,6 @@ module.exports = class Parser
               indentComment = ""
 
             globalCount++
-            # we place these here to indicate that the method had a global status applied
-            result.push("#{indentComment}###~#{@globalStatus}~###") unless /require/.test(line)
 
           result.push line
 

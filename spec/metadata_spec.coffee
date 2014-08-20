@@ -72,7 +72,7 @@ describe "Metadata", ->
       constructDelta("spec/metadata_templates/exports/class_exports.coffee")
 
   describe "Requires", ->
-    fit 'understands basic requires', ->
+    it 'understands basic requires', ->
       constructDelta("spec/metadata_templates/requires/basic_requires.coffee")
 
     it 'understands multiple requires on a single line', ->

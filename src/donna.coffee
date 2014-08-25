@@ -64,17 +64,23 @@ generateMetadata = (inputs) ->
           try
             parser.parseFile(filename, absoluteInput)
           catch error
-            console.warn "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
+            logError(filename, error)
     else
       if isAcceptableFile(input)
         try
           parser.parseFile(input, path.dirname(input))
         catch error
-          console.warn "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
+          logError(filename, error)
 
     metadataSlugs.push generateMetadataSlug(packageJsonPath, parser)
 
   metadataSlugs
+
+logError = (filename, error) ->
+  if error.location?
+    console.warn "Cannot parse file #{ filename }@#{error.location.first_line}: #{ error.message }"
+  else
+    console.warn "Cannot parse file #{ filename }: #{ error.message }"
 
 isAcceptableFile = (filePath) ->
   try

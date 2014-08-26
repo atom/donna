@@ -236,8 +236,10 @@ module.exports = class Metadata
                       position: reference.range[0]
 
                 # apply the reference (if one exists)
-
-                if value.type == "function"
+                if value.type is "primitive"
+                  variable = _.find classNode?.getVariables(), (variable) -> variable.name == value.name
+                  value.doc = variable?.doc.comment
+                else if value.type is "function"
                   # find the matching method from the parsed files
                   func = _.find classNode?.getMethods(), (method) -> method.name == value.name
                   value.doc = func?.doc.comment

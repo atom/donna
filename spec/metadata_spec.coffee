@@ -55,6 +55,9 @@ describe "Metadata", ->
     it 'understands prototype properties', ->
       constructDelta("spec/metadata_templates/classes/class_with_prototype_properties.coffee")
 
+    it 'understands documented prototype properties', ->
+      constructDelta("spec/metadata_templates/classes/class_with_docd_prototype_properties.coffee")
+
     it 'understands comment sections properties', ->
       constructDelta("spec/metadata_templates/classes/class_with_comment_section.coffee")
 

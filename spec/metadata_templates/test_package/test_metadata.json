@@ -392,6 +392,7 @@
                 11
               ]
             ],
+            "doc": null,
             "bindingType": "prototypeProperty",
             "reference": {
               "position": [
@@ -595,6 +596,7 @@
                 14
               ]
             ],
+            "doc": null,
             "bindingType": "classProperty",
             "reference": {
               "position": [
@@ -618,6 +620,7 @@
                 28
               ]
             ],
+            "doc": null,
             "bindingType": "classProperty"
           }
         }

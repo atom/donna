@@ -56,7 +56,32 @@ describe "Metadata", ->
       constructDelta("spec/metadata_templates/classes/class_with_prototype_properties.coffee")
 
     it 'understands documented prototype properties', ->
-      constructDelta("spec/metadata_templates/classes/class_with_docd_prototype_properties.coffee")
+      str = """
+      class TextBuffer
+        # Public: some property
+        prop2: "bar"
+      """
+      metadata = TestGenerator.generateMetadata(str)[0]
+      expect(metadata.files.fakefile.objects['2']['9']).toEqualJson
+        "name": "prop2",
+        "type": "primitive",
+        "doc": "Public: some property ",
+        "range": [[2, 9], [2, 13]],
+        "bindingType": "prototypeProperty"
+
+    it 'understands documented class properties', ->
+      str = """
+      class TextBuffer
+        # Public: some class property
+        @classProp2: "bar"
+      """
+      metadata = TestGenerator.generateMetadata(str)[0]
+      expect(metadata.files.fakefile.objects['2']['15']).toEqualJson
+        "name": "classProp2",
+        "type": "primitive",
+        "doc": "Public: some class property ",
+        "range": [[2, 15], [2, 19]],
+        "bindingType": "classProperty"
 
     it 'understands comment sections properties', ->
       constructDelta("spec/metadata_templates/classes/class_with_comment_section.coffee")
@@ -108,3 +133,31 @@ describe "Metadata", ->
       expect(slug).toEqualJson expected
       expect(_.keys(slug.files)).not.toContain "./Gruntfile.coffee"
       expect(_.keys(slug.files)).not.toContain "./spec/text-buffer-spec.coffee"
+
+class TestGenerator
+  @generateMetadata: (fileContents, options) ->
+    parser = new TestGenerator
+    parser.addFile(fileContents, options)
+    parser.generateMetadata()
+
+  constructor: ->
+    @slugs = {}
+    @parser = new Parser()
+
+  generateMetadata: ->
+    slugs = []
+    for k, slug of @slugs
+      slugs.push(slug)
+    slugs
+
+  addFile: (fileContents, {filename, packageJson}={}) ->
+    filename ?= 'fakefile'
+    packageJson ?= {}
+
+    slug = @slugs[packageJson.name ? 'default'] ?=
+      files: {}
+
+    @parser.parseContent(fileContents, filename)
+    metadata = new Donna.Metadata(packageJson, @parser)
+    metadata.generate(CoffeeScript.nodes(fileContents))
+    Donna.populateSlug(slug, filename, metadata)

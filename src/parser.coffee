@@ -45,7 +45,7 @@ module.exports = class Parser
   # content - A {String} representing the CoffeeScript file content
   # file - A {String} representing the CoffeeScript file name
   #
-  parseContent: (@content, file = '') ->
+  parseContent: (@content, file='') ->
     @previousNodes = []
     @globalStatus = "Private"
 

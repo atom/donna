@@ -197,7 +197,6 @@ module.exports = class Metadata
                     if lookedUpVar.type is 'import'
                       value =
                         name: name
-                        # doc: @commentLines[@lineMapping[value.locationData.first_line] - 1]
                         range: [ [value.locationData.first_line, value.locationData.first_column], [value.locationData.last_line, value.locationData.last_column ] ]
                         reference: lookedUpVar
                     else
@@ -208,7 +207,6 @@ module.exports = class Metadata
                     value =
                       type: 'primitive'
                       name: name
-                      # doc: @commentLines[@lineMapping[value.locationData.first_line] - 1]
                       range: [ [value.locationData.first_line, value.locationData.first_column], [value.locationData.last_line, value.locationData.last_column ] ]
 
                 else
@@ -265,7 +263,6 @@ module.exports = class Metadata
     if exp.base
       type: 'primitive'
       name: exp.base?.value
-      # doc: @commentLines[@lineMapping[exp.locationData.first_line] - 1]
       range: [ [exp.locationData.first_line, exp.locationData.first_column], [exp.locationData.last_line, exp.locationData.last_column ] ]
     else
       throw new Error 'BUG? Not sure how to evaluate this value if it does not have .base'
@@ -282,7 +279,6 @@ module.exports = class Metadata
 
       ret =
         type: 'import'
-        # doc: @commentLines[@lineMapping[exp.locationData.first_line] - 1]
         range: [ [exp.locationData.first_line, exp.locationData.first_column], [exp.locationData.last_line, exp.locationData.last_column ] ]
         bindingType: 'variable'
 
@@ -298,7 +294,6 @@ module.exports = class Metadata
 
     else
       type: 'function'
-      # doc: @commentLines[@lineMapping[exp.locationData.first_line] - 1]
       range: [ [exp.locationData.first_line, exp.locationData.first_column], [exp.locationData.last_line, exp.locationData.last_column ] ]
 
   evalError: (str, exp) ->

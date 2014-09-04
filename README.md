@@ -1,8 +1,11 @@
 # Donna
 
 Donna is a tool for generating [CoffeeScript](http://coffeescript.org/) metadata
-for the purpose of generating API documentation. It was forked from
-[biscotto](https://github.com/atom/biscotto).
+for the purpose of generating API documentation. It reads your CoffeeScript
+module, and outputs an object indicating the locations and other data about
+your classes, properties, methods, etc.
+
+It pulled out of [biscotto](https://github.com/atom/biscotto).
 
 ## Metadata??
 
@@ -115,7 +118,7 @@ with any doc format parser you like.
 
 Donna currently has a counterpart named [tello](https://github.com/atom/tello)
 that generates an easily digestible json format using the [atomdoc][atomdoc]
-format from Donna output.
+format on the docs strings from Donna output.
 
 ## Usage
 
@@ -132,7 +135,7 @@ metadata = donna.generateMetadata(['/path/to/my-module', '/path/to/another-modul
 
 ### From the command line
 
-Pass it the _top level_ directory of your module. It will read the
+Pass it the _top level directory_ of your module. It will read the
 `package.json` file and index any `.coffee` files from within the `src`, `app`,
 or `lib` directories:
 
@@ -140,8 +143,8 @@ or `lib` directories:
 donna -o donna.json /path/to/my-module
 ```
 
-Handles multiple modules. Each should have a `package.json` file. It will place
-the results from both modules in the `donna.json` file.
+It handles multiple modules. Each should have a `package.json` file. It will
+place the results from both modules in the `donna.json` file.
 
 ``` bash
 donna -o donna.json /path/to/my-module /path/to/another-module

@@ -166,7 +166,6 @@ module.exports = class Metadata
     classNode = _.find(@classes, (clazz) -> clazz.getFullName() == className)
 
     for subExp in exp.body.expressions
-
       switch subExp.constructor.name
         # case Prototype-level methods (this.foo = (foo) -> ...)
         when 'Assign'
@@ -176,7 +175,6 @@ module.exports = class Metadata
         when 'Value'
           # case Prototype-level properties (@foo: "foo")
           for prototypeExp in subExp.base.properties
-
             switch prototypeExp.constructor.name
               when 'Comment'
                 value = @eval(prototypeExp)
@@ -188,6 +186,11 @@ module.exports = class Metadata
                   name = prototypeExp.variable.properties[0].name.value
                 else
                   name = prototypeExp.variable.base.value
+
+                # The reserved words are a string with a property: {reserved: true}
+                # We dont care about the reserved-ness in the name. It is
+                # detrimental as comparisons fail.
+                name = name.slice(0) if name.reserved
 
                 value = @eval(prototypeExp.value)
 

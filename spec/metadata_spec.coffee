@@ -83,6 +83,21 @@ describe "Metadata", ->
         "range": [[2, 15], [2, 19]],
         "bindingType": "classProperty"
 
+    it 'outputs methods with reserved words', ->
+      str = """
+      class TextBuffer
+        # Public: deletes things
+        delete: ->
+      """
+      metadata = TestGenerator.generateMetadata(str)[0]
+      expect(metadata.files.fakefile.objects['2']['10']).toEqualJson
+        "name": "delete",
+        "type": "function",
+        "doc": "Public: deletes things ",
+        "paramNames": []
+        "range": [[2, 10], [2, 11]],
+        "bindingType": "prototypeProperty"
+
     it 'understands comment sections properties', ->
       constructDelta("spec/metadata_templates/classes/class_with_comment_section.coffee")
 

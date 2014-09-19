@@ -166,6 +166,9 @@ module.exports = class Method extends Node
       unless @name
         @name = @node.variable.base.value
 
+        # Reserved names will result in a name with a reserved: true property. No Bueno.
+        @name = @name.slice(0) if @name.reserved is true
+
         for prop in @node.variable.properties
           @name += ".#{ prop.name.value }"
 
@@ -180,13 +183,6 @@ module.exports = class Method extends Node
         if /^exports\./.test @name
           @name = @name.substring(8)
           @type = 'class'
-
-        # Reserved names will result in a name like { '0': 'd', '1': 'e', '2': 'l', '3': 'e', '4': 't', '5': 'e' }
-        if _.isObject(@name) && @name.reserved is true
-          name = @name
-          delete name.reserved
-          @name = ''
-          @name += c for p, c of name
 
       @name
 

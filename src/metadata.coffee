@@ -156,6 +156,8 @@ module.exports = class Metadata
 
   visitIn: (exp) ->
 
+  visitExistence: (exp) ->
+
   evalComment: (exp) ->
     type: 'comment'
     doc: exp.comment

@@ -1,2 +1,30 @@
 {
+  "files": {
+    "require_with_generated_path.coffee": {
+      "objects": {
+        "2": {
+          "0": {
+            "type": "class",
+            "name": "Bar",
+            "superClass": null,
+            "bindingType": null,
+            "classProperties": [],
+            "prototypeProperties": [],
+            "doc": null,
+            "range": [
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                8
+              ]
+            ]
+          }
+        }
+      },
+      "exports": {}
+    }
+  }
 }

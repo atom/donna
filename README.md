@@ -1,4 +1,4 @@
-# Donna
+# Donna [![Build Status](https://travis-ci.org/atom/donna.svg?branch=master)](https://travis-ci.org/atom/donna)
 
 Donna is a tool for generating [CoffeeScript](http://coffeescript.org/) metadata
 for the purpose of generating API documentation. It reads your CoffeeScript

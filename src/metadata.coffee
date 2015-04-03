@@ -327,6 +327,7 @@ module.exports = class Metadata
   visitBool: ->
   visitIndex: ->
   visitParens: ->
+  visitReturn: ->
 
   evalOp: (exp) -> exp
 

@@ -127,6 +127,16 @@ describe "Metadata", ->
     it 'understands importing', ->
       constructDelta("spec/metadata_templates/requires/references/buffer-patch.coffee")
 
+    it 'does not throw when reading constructed paths', ->
+      str = """
+      Decoration = require path.join(atom.config.resourcePath, 'src', 'decoration')
+      """
+
+      generateMetadata = ->
+        TestGenerator.generateMetadata(str)
+
+      expect(generateMetadata).not.toThrow()
+
   describe "when metadata is generated from multiple packages", ->
     it 'each slug contains only those files in the respective packages', ->
       singleFile = "spec/metadata_templates/requires/multiple_requires_single_line.coffee"

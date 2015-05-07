@@ -87,7 +87,7 @@ module.exports = class Metadata
           when 'Literal'
             # Something we dont care about is on the right side of the `=`.
             # This could be some garbage like an if statement.
-            return unless value.range
+            return unless value?.range
 
             # case _.str = ...
             if exp.variable.properties.length > 0
@@ -279,6 +279,8 @@ module.exports = class Metadata
   evalCall: (exp) ->
     # The only interesting call is `require('foo')`
     if exp.variable.base.value is 'require'
+      return unless exp.args[0].base?
+
       moduleName = exp.args[0].base.value
       moduleName = moduleName.substring(1, moduleName.length - 1)
 

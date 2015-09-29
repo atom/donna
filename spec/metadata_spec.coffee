@@ -25,7 +25,6 @@ describe "Metadata", ->
 
     expected_filename = filename.replace(/\.coffee$/, '.json')
     expected = JSON.parse(fs.readFileSync(expected_filename, 'utf8'))
-
     expect(generated).toEqualJson(expected)
 
   beforeEach ->
@@ -117,6 +116,9 @@ describe "Metadata", ->
   describe "Requires", ->
     it 'understands basic requires', ->
       constructDelta("spec/metadata_templates/requires/basic_requires.coffee")
+
+    it 'understands requires of expressions', ->
+      constructDelta("spec/metadata_templates/requires/requires_with_call_args.coffee")
 
     it 'understands multiple requires on a single line', ->
       constructDelta("spec/metadata_templates/requires/multiple_requires_single_line.coffee")

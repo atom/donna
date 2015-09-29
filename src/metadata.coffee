@@ -281,7 +281,7 @@ module.exports = class Metadata
     if exp.variable.base.value is 'require'
       return unless exp.args[0].base?
 
-      moduleName = exp.args[0].base.value
+      return unless moduleName = exp.args[0].base.value
       moduleName = moduleName.substring(1, moduleName.length - 1)
 
       # For npm modules include the version number

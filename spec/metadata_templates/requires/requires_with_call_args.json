@@ -1,0 +1,30 @@
+{
+  "files": {
+    "requires_with_call_args.coffee": {
+      "objects": {
+        "2": {
+          "0": {
+            "type": "class",
+            "bindingType": null,
+            "doc": null,
+            "name": "Bar",
+            "classProperties": [],
+            "prototypeProperties": [],
+            "range": [
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                8
+              ]
+            ],
+            "superClass": null
+          }
+        }
+      },
+      "exports": {}
+    }
+  }
+}

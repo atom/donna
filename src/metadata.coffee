@@ -18,7 +18,7 @@ module.exports = class Metadata
     @root.traverseChildren no, (exp) => @visit(exp) # `no` means Stop at scope boundaries
 
   visit: (exp) ->
-    @["visit#{exp.constructor.name}"](exp)
+    @["visit#{exp.constructor.name}"]?(exp)
   eval:  (exp) ->
     @["eval#{exp.constructor.name}"](exp)
 

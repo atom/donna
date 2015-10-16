@@ -143,6 +143,9 @@ describe "Metadata", ->
     it "does not blow up on top-level try/catch blocks", ->
       constructDelta("spec/metadata_templates/top_level_try_catch.coffee")
 
+    it "does not blow up on array subscript assignments", ->
+      constructDelta("spec/metadata_templates/subscript_assignments.coffee")
+
   describe "when metadata is generated from multiple packages", ->
     it 'each slug contains only those files in the respective packages', ->
       singleFile = "spec/metadata_templates/requires/multiple_requires_single_line.coffee"

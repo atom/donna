@@ -91,8 +91,13 @@ module.exports = class Metadata
 
             # case _.str = ...
             if exp.variable.properties.length > 0
-              nameWithPeriods = [exp.variable.base.value].concat(_.map(exp.variable.properties, (prop) -> prop.name.value)).join(".")
-              @defs[nameWithPeriods] = _.extend name: nameWithPeriods, value
+              keyPath = exp.variable.base.value
+              for prop in exp.variable.properties
+                if prop.name?
+                  keyPath += ".#{prop.name.value}"
+                else
+                  keyPath += "[#{prop.index.base.value}]"
+              @defs[keyPath] = _.extend name: keyPath, value
             else # case X = ...
               @defs[exp.variable.base.value] = _.extend name: exp.variable.base.value, value
 

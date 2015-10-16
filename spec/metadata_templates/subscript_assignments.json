@@ -1,0 +1,41 @@
+{
+  "files": {
+    "subscript_assignments.coffee": {
+      "objects": {
+        "0": {
+          "7": {
+            "name": "'x'",
+            "type": "primitive",
+            "range": [
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                9
+              ]
+            ]
+          }
+        },
+        "1": {
+          "11": {
+            "name": "'y'",
+            "type": "primitive",
+            "range": [
+              [
+                1,
+                11
+              ],
+              [
+                1,
+                13
+              ]
+            ]
+          }
+        }
+      },
+      "exports": {}
+    }
+  }
+}

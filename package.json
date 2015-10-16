@@ -7,7 +7,7 @@
     "api"
   ],
   "author": "Ben Ogle <ben.ogle@github.com>",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "engines": {
     "node": ">=0.10.0"
   },

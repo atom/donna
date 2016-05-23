@@ -59,13 +59,13 @@ module.exports = class Metadata
             @exports[firstProp.name.value] = @defs[value.base.value]
           else
             # case `exports.foo = 42`
-            unless firstProp.name.value == value.name
+            unless firstProp.name?.value == value.name
               @defs[firstProp.name.value] =
                 name: firstProp.name.value
                 bindingType: 'exportsProperty'
                 type: value.type
                 range: [ [exp.variable.base.locationData.first_line, exp.variable.base.locationData.first_column], [exp.variable.base.locationData.last_line, exp.variable.base.locationData.last_column ] ]
-            @exports[firstProp.name.value] =
+            @exports[firstProp.name?.value] =
               startLineNumber:  exp.variable.base.locationData.first_line
         else
           # case `exports = bar`
@@ -283,7 +283,7 @@ module.exports = class Metadata
 
   evalCall: (exp) ->
     # The only interesting call is `require('foo')`
-    if exp.variable.base.value is 'require'
+    if exp.variable.base?.value is 'require'
       return unless exp.args[0].base?
 
       return unless moduleName = exp.args[0].base.value

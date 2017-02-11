@@ -120,6 +120,9 @@ describe "Metadata", ->
     it 'understands requires of expressions', ->
       constructDelta("spec/metadata_templates/requires/requires_with_call_args.coffee")
 
+    it 'does not error on requires with a call of the required module', ->
+      constructDelta("spec/metadata_templates/requires/requires_with_call_of_required_module.coffee")
+
     it 'understands multiple requires on a single line', ->
       constructDelta("spec/metadata_templates/requires/multiple_requires_single_line.coffee")
 

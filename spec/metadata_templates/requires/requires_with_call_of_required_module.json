@@ -1,0 +1,16 @@
+{
+  "files": {
+    "requires_with_call_of_required_module.coffee": {
+      "objects": {
+        "0": {
+          "6": {
+            "name": "foo",
+            "type": "function",
+            "range": [[ 0, 6 ], [ 0, 23]]
+          }
+        }
+      },
+      "exports": {}
+    }
+  }
+}

@@ -15,6 +15,7 @@ module.exports = class VirtualMethod extends Node
   # doc - The property node (a {Object})
   # options - The parser options (a {Object})
   constructor: (@entity, @doc, @options) ->
+    super()
 
   # Public: Get the method type, either `class`, `instance` or `mixin`.
   #

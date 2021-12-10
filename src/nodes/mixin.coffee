@@ -14,6 +14,7 @@ module.exports = class Mixin extends Node
   # options - The parser options (a {Object})
   # comment - The comment node (a {Object})
   constructor: (@node, @fileName, @options, comment) ->
+    super()
     try
       @methods = []
       @variables = []

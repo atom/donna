@@ -16,6 +16,7 @@ module.exports = class File extends Class
   # lineMapping - An object mapping the actual position of a member to its Donna one
   # options - Any additional parser options
   constructor: (@node, @fileName, @lineMapping, @options) ->
+    super()
     try
       @methods = []
       @variables = []

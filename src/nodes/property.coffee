@@ -27,6 +27,7 @@ module.exports = class Property extends Node
   # name - The filename (a {String})
   # comment - The comment node (a {Object})
   constructor: (@entity, @node, @lineMapping, @options, @name, comment) ->
+    super()
     @doc = new Doc(comment, @options)
 
     @setter  = false

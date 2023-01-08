@@ -17,6 +17,7 @@ module.exports = class Method extends Node
   # options - The parser options (a {Object})
   # comment - The comment node (a {Object})
   constructor: (@entity, @node, @lineMapping, @options, comment) ->
+    super()
     try
       @parameters = []
 

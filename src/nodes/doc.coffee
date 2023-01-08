@@ -11,6 +11,7 @@ module.exports = class Doc extends Node
   # node - The comment node (a {Object})
   # options - The parser options (a {Object})
   constructor: (@node, @options) ->
+    super()
     try
       if @node
         trimmedComment = @leftTrimBlock(@node.comment.replace(/\u0091/gm, '').split('\n'))

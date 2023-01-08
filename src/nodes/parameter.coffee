@@ -12,6 +12,7 @@ module.exports = class Parameter extends Node
   # options - The parser options (a {Object})
   # optionized - A {Boolean} indicating if the parameter is a set of options
   constructor: (@node, @options, @optionized) ->
+    super()
 
   # Public: Get the full parameter signature.
   #

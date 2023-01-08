@@ -13,6 +13,7 @@ module.exports = class Variable extends Node
   # classType - A {Boolean} indicating if the class is a `class` or an `instance`
   # comment - The comment node (a {Object})
   constructor: (@entity, @node, @lineMapping, @options, @classType = false, comment = null) ->
+    super()
     try
       @doc = new Doc(comment, @options)
       @getName()
